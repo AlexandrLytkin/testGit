@@ -1,5 +1,6 @@
 import inspect
 import telebot
+import os
 
 
 class Test:
@@ -13,11 +14,26 @@ class Test:
                 yield self.num_l[i] * self.num_t[i]
 
 
+def find_attrs(obj):
+    attrs = dir(obj)
+    cont = []
+    for atr in attrs:
+        if atr.startswith('__') and atr.endswith('__'):
+            cont.append(atr)
+    return cont
+
+
+def find_methods(obj):
+    attrs = dir(obj)
+    cont = []
+    for atr in attrs:
+        if not atr.startswith('__') and not atr.endswith('__'):
+            cont.append(atr)
+    return cont
+
+
 def introspection_info(obj):
     # help(obj)
-    #
-    # print(type(obj))
-    #
     # print(f'Тип объекта:{type(obj)} атрибут:', hasattr(obj, 'num_l'))
     # if hasattr(obj, 'num_l'):
     #     print('сам атрибут', getattr(obj, 'num_l'))
@@ -25,15 +41,14 @@ def introspection_info(obj):
     # atr = 'num_l'
     # print(getattr(obj, atr, f"атрибута '{atr}' нет"))
 
-    # print(dir(obj))
-
-    # print(callable(obj))
-    # print(isinstance(obj, list))
-    # print(inspect.getmodule(obj))
-    print(f'Тип объекта:{type(obj)},\n'
-          f'Атрибуты объекта: {dir(obj)}\n'
-          f'Методы объекта: {dir(obj)}\n'
-          f' ')
+    print(callable(obj))
+    print(
+        f'Тип объекта:\n {type(obj)},\n'
+        f'Атрибуты объекта:\n {find_attrs(obj)}\n'
+        f'Методы объекта:\n {find_methods(obj)}\n'
+        f'Модуль объекта:\n {inspect.getmodule(obj)}\n'
+        f''
+    )
     pass
 
 
@@ -50,4 +65,3 @@ introspection_info(my_list)
 introspection_info(my_tuple)
 introspection_info(test)
 introspection_info(result)
-# {'type': 'int', 'attributes': ['__abs__', '__add__', ...], 'methods': [], 'module': '__main__'}
