@@ -29,7 +29,7 @@ def introspection_info(obj):
 
     # print(callable(obj))
     # print(isinstance(obj, list))
-    print(inspect.getmodule(obj))
+    # print(inspect.getmodule(obj))
     print(f'Тип объекта:{type(obj)},\n'
           f'Атрибуты объекта: {dir(obj)}\n'
           f'Методы объекта: {dir(obj)}\n'
